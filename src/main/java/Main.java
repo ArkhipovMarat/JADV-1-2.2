@@ -1,20 +1,20 @@
 public class Main {
     private static final int VISITOR_COUNT = 5;
     private static final int OFFICIANT_COUNT = 2;
-    private static final int VISITOR_PERIOD = 2000;
+    private static final int VISITOR_PERIOD = 500;
 
     public static void main(String[] args) throws InterruptedException {
         Restaraunt restaraunt = new Restaraunt();
         officiantEntering(restaraunt);
-        kitchenerEntering(restaraunt);
+        kitchenerEntering(restaraunt, "Bob");
         visitorEntering(restaraunt);
     }
 
     public static void visitorEntering(Restaraunt restaraunt) throws InterruptedException {
         for (int i = 1; i <= VISITOR_COUNT; i++) {
-            Thread.sleep(VISITOR_PERIOD);
             Thread visitor = new Visitor("" + i, restaraunt);
             visitor.start();
+            Thread.sleep(VISITOR_PERIOD);
         }
     }
 
@@ -26,10 +26,10 @@ public class Main {
         }
     }
 
-    public static void kitchenerEntering(Restaraunt restaraunt) {
-            Thread kitchener = new Kitchener("Bob", restaraunt);
-            kitchener.setDaemon(true);
-            kitchener.start();
+    public static void kitchenerEntering(Restaraunt restaraunt, String name) {
+        Thread kitchener = new Kitchener(name, restaraunt);
+        kitchener.setDaemon(true);
+        kitchener.start();
     }
 
 }

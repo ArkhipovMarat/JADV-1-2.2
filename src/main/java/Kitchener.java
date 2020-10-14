@@ -1,6 +1,6 @@
 public class Kitchener extends Thread{
 
-    private static final int COOK_TIME = 3000;
+    private static final int COOK_TIME = 250;
     private Restaraunt restaraunt;
 
     public Kitchener(String name, Restaraunt restaraunt) {
@@ -14,9 +14,9 @@ public class Kitchener extends Thread{
 
         while (true) {
             try {
-                restaraunt.beginCoocking(getName());
+                restaraunt.getKitchen().beginCoocking(getName());
                 coocking();
-                restaraunt.endCoocking(getName());
+                restaraunt.getKitchen().endCoocking(getName());
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }

@@ -14,7 +14,8 @@ public class Officiant extends Thread {
         while (true) {
             try {
                 restaraunt.acceptOrder(getName());
-                restaraunt.bringOrder(getName());
+                restaraunt.getKitchen().notifyKitchener();
+                if (restaraunt.bringOrder(getName())) restaraunt.notifyVisitor();
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
